@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <description url="http://www.coldbox.org/distribution/eclipse/">
+      This is the ColdBox Platform Eclipse Plugin Update Site
+   </description>
+   <feature url="features/org.coldbox.apidocs_2.1.0.jar" id="org.coldbox.apidocs" version="2.1.0">
+      <category name="Help &amp; Reference"/>
+   </feature>
+   <category-def name="Help &amp; Reference" label="Help &amp; Reference"/>
+</site>

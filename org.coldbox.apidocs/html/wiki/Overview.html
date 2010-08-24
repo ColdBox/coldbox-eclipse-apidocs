@@ -1,0 +1,461 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<title>ColdBox Overview</title>
+</head><body>
+
+<h1 id="ColdBoxOverview">ColdBox Overview</h1>
+<p>
+</p><div class="wiki-toc"><ol><li><a href="#WelcometoColdBox:">Welcome to ColdBox:</a><ol><li><a href="#BasicInformation">Basic Information</a></li><li>
+<a href="#WhatsNew">What's New ?</a></li><li>
+<a href="#CompatibilityGuides">Compatibility Guides</a></li><li>
+<a href="#DownloadAPIDocumentation">Download API Documentation</a></li><li>
+<a href="#Installation">Installation</a></li><li>
+<a href="#Introduction">Introduction</a></li><li>
+<a href="#ConfigurationConventions">Configuration &amp; Conventions</a></li><li>
+<a href="#GettingStarted">Getting Started</a></li><li>
+<a href="#Extensions:PluginsInterceptorsandmore">Extensions: Plugins, Interceptors and more</a></li><li>
+<a href="#RemoteFramework">Remote Framework</a></li><li>
+<a href="#HandsOnGuides">Hands On Guides</a></li><li>
+<a href="#ReferenceGuides">Reference Guides</a></li><li>
+<a href="#GeneratedDocumentation">Generated Documentation</a></li><li>
+<a href="#ColdBoxCodeDepotSiteUsage">ColdBox Code Depot &amp; Site Usage</a></li><li>
+<a href="#OtherResources">Other Resources</a></li></ol></li></ol></div>
+<p></p>
+<h2 id="WhatisColdBox">What is ColdBox?</h2>
+<p>
+ColdBox is an event-driven conventions based ColdFusion Framework. It
+provides you with a set of reusable code and tools that you can use to
+increase your productivity, and it provides you with a development
+standard when working in a team environment. It makes use of an MVC
+(Model View Controller) design pattern and an extensive array of
+patterns for its operations such as Factories, Helpers, Workers, etc.
+And since it is based on CFCs it does not rely on an XML dialect.
+However, ColdBox is not only an MVC framework, but a software toolkit
+and a remote event-driven framework. Making it a robust application
+development platform, The ColdBox Platform.
+</p>
+<div align="center">
+<img src="Overview_files/ColdboxPlatform.png" style="border: 1px outset rgb(234, 234, 234);" width="750">
+</div>
+<p>In this article you will have an overview of the main components of
+this Object Oriented Framework. Below are some good resources for you
+to read about design patterns and some object orientation goodness.
+Having some basic object oriented knowledge will help you tremendously
+during your initial stages of ColdBox development. However, if you are
+not an OO guru, no worries, the guides contained in this wiki will help
+you and take you to several learning paths of object orientation and
+software development. This is just an introductory guide, so you might
+encounter new terminology or features of the framework that you might
+have no clue about. I urge you to continue reading the guides in order
+to find a cohesive outlook of what is ColdBox
+</p>
+<ul><li><a class="ext-link" href="http://java.sun.com/blueprints/corej2eepatterns/Patterns/index.html"><span class="icon">Sun's Core J2EE Patterns Catalog</span></a>
+</li><li><a class="ext-link" href="http://martinfowler.com/eaaCatalog/"><span class="icon">Catalog Of Patterns of Enterprise Application Architecture</span></a>
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbMVC">What is MVC</a>
+</li><li><a class="ext-link" href="http://www.adobe.com/devnet/coldfusion/articles/intro_cfcs.html"><span class="icon">What are CFC's by Ben Forta</span></a>
+</li><li><a class="ext-link" href="http://www.oreillynet.com/pub/a/javascript/2003/09/24/coldfusion_tips.html"><span class="icon">ColdFusion CFC Tips</span></a>
+</li></ul><div align="center"><img src="Overview_files/ColdboxMVCDesignPattern.jpg" style="border: 1px outset rgb(234, 234, 234);"></div>
+<h2 id="ColdBoxServiceToWorkerDiagram">ColdBox Service To Worker Diagram</h2>
+<div align="center"><img src="Overview_files/ColdBoxServicetoWorker.png" style="border: 1px outset rgb(234, 234, 234);"></div>
+<h2 id="FeaturesCapabilities">Features &amp; Capabilities</h2>
+<p>
+Please see the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbFeatures">Features and Capabilities Guide</a> for an in depth overview.
+</p>
+<h2 id="SystemRequirements">System Requirements</h2>
+<p>
+Below is a quick overview:
+</p>
+<h3 id="SupportedCFMLEnginesare">Supported CFML Engines are</h3>
+<ul><li>Adobe ColdFusion 7.X and greater
+</li><li>BlueDragon 7.X and greater
+</li><li>Railo 2.0 and greater
+</li></ul><h3 id="SupportedOS">Supported OS</h3>
+<ul><li>Any OS that ColdFusion can run
+</li></ul><p>
+Please see the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbSystemRequirements">System Requirements Guide</a> for an in depth overview.
+</p>
+<h2 id="WhataresomeofColdBoxsNovelFeatures">What are some of ColdBox's Novel Features</h2>
+<h3 id="Documentation">Documentation</h3>
+<p>We are firm believers in developer education. We have over 30 step
+by step guides and over 550 pages worth of documentation right in this
+wiki. We believe that by empowering the user with knowledge, the
+adaptation rate will increase and the ability of the developer to find
+what they need will make their productivity increase. </p>
+<h3 id="CustomConventions">Custom Conventions</h3>
+<p>
+Conventions over configurations is our motto.  We get rid of verbosity of xml logic and use <a class="missing wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/ColdFusion" rel="nofollow">ColdFusion?</a>
+and a set of conventions for our applications. With ColdBox you can
+even define your own application layouts and conventions. This gives
+great flexibility to developers who are used to their own application
+layouts and conventions. Conventions are also used for registering
+events, interceptors, plugins and much more. The use of conventions
+over configurations is what makes ColdBox unique.
+</p>
+<h3 id="ColdfusionControllersinsteadofXMLControllers">Coldfusion Controllers instead of XML Controllers</h3>
+<p>ColdBox doesn't rely on xml declarative logic where you have to
+define an event, what it does and where does it go. ColdBox is a
+conventions based framework that will let you program in ColdFusion to
+get things done. You basically expose methods on event handler CFC's
+(Controllers) by turning their access to public or remote. The
+framework then will auto-register the handler CFC's and now you are
+able to use the methods as ColdBox Events. So the declarative logic is
+now placed within the methods, where you can place method exit points,
+what business logic to call and what view to render or what event to
+surrender execution to or whatever you like, in CODE. This is how
+ColdBox can help you create multi-layered applications with one single
+skeleton and configuration file. So instead of working with a long and
+complex configuration file all the time, you are mostly working with
+ColdFusion code all the time. You would use the configuration file to
+setup your project or maybe tweak some settings.
+</p>
+<h3 id="Aspectprogramming">Aspect programming</h3>
+<p>ColdBox comes bundled with an extensive set of plugins and
+interceptors that will help you on every day software application tasks
+like bug reports and notifications, AOP file logging with
+auto-archiving, per-environment settings, storage facilities for
+cluster environments, object caching, datasource declarations, web
+services integrations, internationalization, IoC integrations,
+application security, pretty URL's via SES and so much more. ColdBox is
+not only an MVC framework but a development platform.
+</p>
+<h3 id="ColdBoxDashboard">ColdBox Dashboard</h3>
+<p>The ColdBox Dashboard is a visual application that helps you
+configure your framework installation and has tools for code
+generation. It is also a self-documenting application that will help
+you learn about the framework. You can modify all of the framework
+configurations, read documentation and it is tightly integrated to this
+site for you to search the wiki, svn repository, and ticket reports,
+and much more. <i>(Different License than The ColdBox Framework)</i>
+</p>
+<h3 id="ColdBoxCaching">ColdBox Caching</h3>
+<p>
+ColdBox has an advanced memory aware and configurable caching engine.
+You have several tuning parameters for the cache and also visual cache
+reports in the debugging panel. You can actually see how many objects
+and what type of objects are in your cache, the efficiency of your
+cache and the tuning parameters. This feature will help developers save
+time and actually not have to worry about persistence. ColdBox also
+allows for event caching, in which the HTML output events produce will
+be cached by the framework and presented to users. This will enhance
+applications and system stability. The best part of it is that you use
+metadata in the cfcomponent and cffunction tags to actually declare
+caching parameters. ColdBox also allows for extensive view caching and
+on-demand render and cache capabilities. To top it off, the caching
+engine has an event broadcaster model built-in that can advice you off
+new objects and object removals.
+</p>
+<div align="center">
+<img src="Overview_files/cachemonitor.png" style="border: 1px outset rgb(234, 234, 234);">
+</div>
+<h3 id="UnitTesting">Unit Testing</h3>
+<p>ColdBox is a framework based on objects and Unit Testing is an
+integral part of development, then why shouldn't you be able to unit
+test your handlers and provide you with integration testing? Well, Unit
+Testing is part of ColdBox. ColdBox includes a unit testing feature to
+let you do integration testing and test the entire application by
+testing your event handlers. You can event test relocations and
+re-routing.
+</p>
+<h3 id="ColdBoxProxy:FlexAirRemoteIntegration">ColdBox Proxy: Flex/Air/Remote Integration</h3>
+<p>The ColdBox proxy enables remote applications like Flex and AIR to
+communicate with ColdBox and provide an event model for those
+applications. Not only that, but you can reinitialize the entire
+application, get settings, and yes, announce custom or core
+interceptions. You can create custom interceptor chains for your model
+that can be executed asynchronously when a user hits a save record
+button for example. You can create a Service Layer with built-in
+environmental settings, logging, error handling, event interception and
+chaining, you name it, and the possibilities are endless.
+</p>
+<p>Not only that, but this enables you to actually create any amount of
+front ends using the same reusable ColdBox and model code. The code is
+the same, you create event handlers, you interact with a request
+collection, with core and custom plugins, but you don't set views or
+layouts because the framework is now a remote framework for your model.
+So what do you do, well, return data, arrays, xml, and value objects.
+Anything, right from within the event handlers or setup a configuration
+setting that tells the framework to always return the request
+collection.
+</p>
+<div align="center"><img src="Overview_files/coldboxproxy_overview.png" style="border: 1px outset rgb(234, 234, 234);"></div>
+<h2 id="HowColdBoxWorks">How ColdBox Works?</h2>
+<p>ColdBox uses both implicit and explicit invocation methods to
+execute events and render content; ColdBox is an event driven
+framework. You have one single xml configuration file: <i>coldbox.xml.cfm</i>, from where you can configure your entire application (No logic, just configuration data).  You can use <a class="ext-link" href="http://www.coldspringframework.org/"><span class="icon">ColdSpring</span></a>, <a class="ext-link" href="http://www.compoundtheory.com/"><span class="icon">Transfer</span></a>,
+Remoting, CRUD, Bean/DAO Factories or any other technology and/or
+pattern that you can think off with ColdBox. However, ColdBox does make
+you adhere to an application <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure">directory structure</a>
+based on conventions that are fully customizable. This is done with the
+purpose of creating a standard for all developers in the same team to
+share and for ColdBox to find what it needs. Remember that this
+framework will not solve your problems. It is a standard, a foundation
+on which to develop on and thanks to its software programming aspects
+that it provides, this framework can also be a development toolkit.
+However, it is up to you to create GOOD code, this is not a magical
+framework that will make your code better. It will help you, but at the
+end of the day, it is your responsibility.
+</p>
+<p>ColdBox makes use of the Front Controller design pattern as its
+means of operation while in MVC mode. This means that every request
+comes in through a single template, usually <strong>index.cfm</strong>.
+Once a request is received by the framework through this front
+controller, it will parse the request and re-direct appropriately to
+the correct execution paths. The way events are detected are via a
+URL/FORM or remote variable named by default <strong>event</strong> or
+by using the default SES routing techniques in ColdBox. This event
+variable holds a specific pattern that lets the framework know what to
+execute. This is called ColdBox event syntax:
+</p>
+<p>
+<strong>NON SES MODE</strong>
+<i>[handler|package].[action]</i>
+</p>
+<p>
+<strong>SES MODE</strong>
+<i>/index.cfm/{package}/{handler}/{action}</i>
+</p>
+<p>The handler is the name of the event handler CFC and the action is
+the name of the public or remote method to execute. You can also
+pre-pend package names (directories) of where event handlers can be
+found. Please note that our recommendation is to use SES routing so you
+can create meaningful URI's and abstract out the real names of the
+handlers and locations.
+</p>
+<blockquote>
+<p>
+You are only limited by your ingenuity
+</p>
+</blockquote>
+<h2 id="ImplicitExplicitInvocations">Implicit &amp; Explicit Invocations</h2>
+<p>ColdBox Events can be registered for execution in two different
+ways. Events can be registered for the following events via the
+configuration file, which are run implicitly (No need for you to call
+them):
+</p>
+<ul><li>Request Start Handler (simulates onRequestStart)
+</li><li>Request End Handler (simulates onRequestEnd)
+</li><li>Application Start Handler (simulates onApplicationStart)
+</li><li>Session Start Handler (simulates onSessionStart)
+</li><li>Session End Handler (simulates onSessionEnd)
+</li><li>defaultEvent (The default event to execute)
+</li><li>onException (The event to execute when an exception occurs)
+</li><li>onInvalidEvent (The event to execute when an invalid event is detected)
+</li></ul><p>There are also some more implicit convention method
+declarations that can be executed by just writing the following methods
+inside of a handler CFC:
+</p>
+<table class="wiki">
+<tbody><tr><td> <strong>preHandler</strong>  </td><td> Executes before the requested event (In the same handler CFC) 
+</td></tr><tr><td> <strong>postHandler</strong> </td><td> Executes after the requested event (In the same handler CFC) 
+</td></tr><tr><td> <strong>onMissingAction</strong> </td><td> Executes if an action was requested from this handler but the method does not exist (In the same handler CFC) 
+</td></tr></tbody></table>
+<p>
+   
+The other method to execute events is via explicit declarations from within your code using the <strong>runEvent()</strong>
+method. From these events, you declare what business actions to invoke,
+what view to render, call/use plugins, and if more events need to be
+executed (chaining). All these actions are done explicitly, you define
+them in CF code and <strong>not in XML Dialect</strong>.  The ColdBox controller then implicitly renders layouts/views that were set by the event handlers and finalizes execution.
+</p>
+<p>
+One thing to note, is that the event handler's events (<i>methods</i>)
+are very loosely coupled to each other. They interact on their own and
+do what they need to do and surrender execution to the framework. As
+you can see, due to the nature of event handlers written in ColdFusion,
+you have explicit declarations that would otherwise be implicit if done
+in an XML based dialect. Thus, the cohesion between implicit and
+explicit event executions can exist in a ColdBox application. At the
+end of the day, ColdBox is based on events and cannot function without
+them.
+</p>
+<p>
+Below is a quote by Oscar Arevalo concerning ColdBox's functionality:
+</p>
+<blockquote>
+<p>ColdBox takes a more direct approach to determine what gets called
+and when; yes, this adds some coupling between the views and the event
+handlers, but the benefit is that the amount of indirection and
+obfuscation is reduced; resulting in what I think is one of the biggest
+benefits of ColdBox: that you actually program in coldfusion, and not
+in some XML dialect. This results in applications that are very easy to
+follow, even if the framework is not there." by <strong>Oscar Arevalo</strong>
+</p>
+</blockquote>
+<h2 id="Therequestlifecycle">The request lifecycle</h2>
+<p>
+Please see the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestLifecycle">application life cycle guide</a> to understand the basics of <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/ColdBox">ColdBox</a>'s request life cycles.
+</p>
+<p>
+ 
+</p>
+<h2 id="ConfigurationFilecoldbox.xml">Configuration File (coldbox.xml)</h2>
+<p>
+ColdBox is configured for operation via a single xml file. You can
+define the major settings for your application, what features to use,
+etc. You need to read the following guide to understand much better the
+possibilities with ColdBox
+</p>
+<ul><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide">Configuration Guide</a>
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbSettingsGuide">Settings Guide</a>
+</li></ul><h2 id="EventHandlersControllers">Event Handlers (Controllers)</h2>
+<p>
+ColdBox Event handlers are CFC's that act as your application controllers. Most of this topic is covered in the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbEventHandlersGuide">Event Handlers Guide</a>. Here is a brief introduction:
+</p>
+<ul><li>First of all, these CFC's must extend the coldbox eventhandler base CFC: <strong>coldbox.system.eventhandler</strong>
+</li><li>If they implement an <strong>init</strong> method, then they must call the base class constructor using the <strong>super</strong>
+method. Remember that if you implement an init method in an event
+handler. All the methods executed from this handler will run the
+constructor code.
+</li><li>The CFC's must be placed in the <strong>handlers</strong> directory under your application (Conventions). See <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure">cbDirectoryStructure</a>
+</li><li>Then you need to create methods that will respond to events. ColdBox uses the <strong>event</strong> action variable on form submits and url parameters to determine what event to execute.  
+</li><li>Handlers will be cached by the framework and cache metadata can be attached to their cfcomponent declaration.
+</li></ul><p>
+The format of this event variable is <strong>{package}.{event_handler CFC}.{method}</strong>
+</p>
+<p>The framework on initialization will read your handler directory and
+register the available handlers. Once an event is detected to execute,
+the framework will validate both the handler and the method. Therefore,
+in order to expose an event to the framework, just create a method in
+your CFC with public or remote access.
+</p>
+<p>Event handlers can also be called from remote applications such as
+Ajax and Flex via the ColdBox Proxy. You can even determine if an
+incoming request is an MVC or Remote request and react accordingly. In
+remote mode, your event handlers can actually return data.
+</p>
+<h2 id="RequestCollection">Request Collection</h2>
+<p>ColdBox also uses a request collection data structure where all
+variables can be stored and shared among an execution request. The
+Request Collection is a central repository of information that is
+refreshed on every user request with the request's information. This is
+how data gets moved around from event handlers to views and layouts to
+plugins and anything running inside of the framework and in the MVC
+layers. The object containing the request collection is the request
+context object found at coldbox.system.beans.requestContext.(<a href="http://www.coldboxframework.com/api">See ColdBox API</a>).
+Not only can you use the request context object but you can decorate
+it! You can expand its functionality according to your needs with the
+introduction of ColdBox 2.5.0, please read the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestContextDecoratorGuide">Request Context Decorator Guide</a>
+to help you learn more. The request context is not a mere data
+structure where you get and set values, but an object that is used to
+set views or layouts for rendering, caching views, getting event
+metadata, determining what is being executed and so much more.
+</p>
+<h2 id="Plugins">Plugins</h2>
+<p>Another important ColdBox feature is the use of a plugin library of
+CFC's that extend the normal usage of ColdBox to application specific
+tasks but without hindering system performance. These plugins are
+reusable components that your applications can use and can be loaded on
+demand via the ColdBox Plugin Factory. Some samples are: i18n, resource
+bundles, refresh a webservice stub, Bug Reports, java file utilities,
+etc. This is a major difference between ColdBox and any other
+framework, in that it gives you a set of reusable on-demand components
+for tedious or repeatable application-specific tasks. Thus, the toolkit
+aspect of ColdBox.
+</p>
+<p>
+Also, not only can you use and modify the plugins that come with every ColdBox installation, <strong>but you can create your own</strong>.
+You are not limited anymore, you can extend the framework to your
+needs. You can create as many plugins as you want and build a plugins
+library that can be located by just specifying it on the configuration
+file or loaded up via conventions. You will then be able to get the
+plugin and use it on any of your ColdBox applications. The best part of
+it all, is that the plugin will inherit all of the framework's
+functionality, so you have everything that you need to be able to code.
+</p>
+<p>
+How easy is it? well, you just do the following:
+</p>
+<ul><li>Make your plugin CFC extend <strong>coldbox.system.plugin</strong>
+</li><li>Create an init method with the following standard code:
+</li></ul><div class="code"><pre><span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"init"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"coldbox.system.plugin"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_attribute">cache</span><span class="h_other">=</span><span class="h_doublestring">"{true or false}"</span><span class="h_other"> </span><span class="h_attribute">cachetimeout</span><span class="h_other">=</span><span class="h_doublestring">"{x in minutes}"</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"controller"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_other"> </span><span class="h_attribute">required</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;cfscript&gt;</span>
+        //Set controller reference
+        super.Init(arguments.controller);
+        //Plugin Name
+        setpluginName("Name of the plugin");
+        //Version of the plugin
+        setpluginVersion("1.0");
+        //Small description
+        setpluginDescription("I am a simple bean factory");
+        return this;
+        <span class="h_tag">&lt;/cfscript&gt;</span>
+<span class="h_tag">&lt;/cffunction&gt;</span>
+</pre></div><ul><li>Create your methods and WALLAH!!! You are done and you can call any of the inherited methods from coldbox.system.plugin.cfc
+</li><li>You can also declare caching metadata in the cfcomponent declaration, so ColdBox will persist your plugins.
+</li></ul><p>
+<strong>Please see the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbMyFirstPlugin">Creating My First Plugin Guide</a> for more information</strong>
+</p>
+<h2 id="Interceptors">Interceptors</h2>
+<p>ColdBox interceptors increase functionality for applications and
+framework alike, without touching the core functionality, and thus
+encapsulating logic into separate objects. This pattern wraps itself
+around a request in specific execution points in which it can process,
+pre-process, post-process and redirect requests. These interceptors can
+also be stacked to form interceptor chains that can be executed
+implicitly. The chaining is all about positioning in the configuration
+file. The order of declaration is very important. These stacked
+interceptor chains form a chain of separate, declaratively-deployable
+services to an existing web application or framework without incurring
+any changes to the main application or framework source code. This is a
+powerful feature that can help developers and framework contributors
+share and interact with their work.
+</p>
+<p>Interceptors are a great compliment to ColdBox plugins, in which now
+they can be used alongside of them and implicitly add functionality to
+a ColdBox application. Another important aspect to note is that
+Interceptors have full access to a request's lifecycle and the
+framework. Thus, they can get application settings, redirect control,
+execute events, use the cache manager, get plugins, transform views,
+adapt views for certain protocols and much more. Please read the full <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbInterceptorsGuide">Interceptor's Guide</a> for an in-depth tutorial.
+</p>
+<h3 id="InterceptorClassDiagram">Interceptor Class Diagram</h3>
+<div align="center">
+<img src="Overview_files/interceptor_classdiagram.jpg" style="border: 1px outset rgb(234, 234, 234);">
+</div>
+<h3 id="InterceptorSequenceDiagram">Interceptor Sequence Diagram</h3>
+<div align="center">
+<img src="Overview_files/interceptor_chain.gif" style="border: 1px outset rgb(234, 234, 234);">
+</div>
+<h3 id="ForwhatcanIusethem">For what can I use them</h3>
+<p>
+Below are just a few applications of ColdBox Interceptors:
+</p>
+<ul><li>Security
+</li><li>Event based Security
+</li><li>Method Tracing
+</li><li>AOP Interceptions
+</li><li>Publisher/Consumer operations
+</li><li>Implicit chain of events
+</li><li>Content Appending or Pre-Pending
+</li><li>View Manipulations
+</li><li>Custom SES support
+</li><li>Cache advices on insert and remove
+</li><li>Much more...
+</li></ul><h3 id="MuchmorethanInterceptors">Much more than Interceptors</h3>
+<p>
+However, we went a step further with interception points and created
+the hooks necessary in order to implement an observer/observable
+pattern into the entire interceptor service. Ok ok, what does this
+mean? It means, that you are not restricted to the pre-defined
+interception points that ColdBox provides, <strong>you can create your own</strong>
+WOW! Really? Yes, you can very easily declare execution points via the
+configuration file or register at runtime, create your interceptors
+with the execution point you declared (Conventions baby!!) and then
+just announce interceptions in your code via the interception API. The
+power of conventions. However, not only can you intercept at an
+execution point, but you can actually send a structure of intercepted
+data right into the interceptor. You can use these custom interceptors
+as a set of listeners waiting for broadcast information. You can even
+create chains of listeners for the same message.
+</p>
+<h2 id="Conclusion">Conclusion</h2>
+<p>I hope that this overview gave you an insight into how powerful
+ColdBox is for building your web applications. It is a new generation
+framework based on conventions that will increase your productivity and
+adaptability in a team environment. Welcome to the ColdBox Platform.
+</p>
+
+
+</body></html>

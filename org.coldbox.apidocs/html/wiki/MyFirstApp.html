@@ -1,0 +1,891 @@
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+<title>My First ColdBox Applicatiion</title>
+</head><body>
+
+<h1 id="MyFirstColdBoxApplication">My First ColdBox Application</h1>
+<p>
+</p><div class="wiki-toc"><ol><li><a href="#WelcometoColdBox:">Welcome to ColdBox:</a><ol><li><a href="#BasicInformation">Basic Information</a></li><li>
+<a href="#WhatsNew">What's New ?</a></li><li>
+<a href="#CompatibilityGuides">Compatibility Guides</a></li><li>
+<a href="#DownloadAPIDocumentation">Download API Documentation</a></li><li>
+<a href="#Installation">Installation</a></li><li>
+<a href="#Introduction">Introduction</a></li><li>
+<a href="#ConfigurationConventions">Configuration &amp; Conventions</a></li><li>
+<a href="#GettingStarted">Getting Started</a></li><li>
+<a href="#Extensions:PluginsInterceptorsandmore">Extensions: Plugins, Interceptors and more</a></li><li>
+<a href="#RemoteFramework">Remote Framework</a></li><li>
+<a href="#HandsOnGuides">Hands On Guides</a></li><li>
+<a href="#ReferenceGuides">Reference Guides</a></li><li>
+<a href="#GeneratedDocumentation">Generated Documentation</a></li><li>
+<a href="#ColdBoxCodeDepotSiteUsage">ColdBox Code Depot &amp; Site Usage</a></li><li>
+<a href="#OtherResources">Other Resources</a></li></ol></li></ol></div>
+<p></p>
+<h2 id="Introduction">Introduction</h2>
+<p>
+This quick guide will show you how to start off and create a running
+ColdBox application. You can generate it via ANT or do a simple
+copy/paste of the ColdBox application template or use the ColdBox
+dashboard to generate an application. I would recommend you at least
+read the ColdBox Overview guide before reading this guide.
+</p>
+<p>How to start? Start off by copying the ApplicationTemplate folder to
+your web root and name it to something you want. Then, the first place
+to start is your <strong><i>config/coldbox.xml.cfm</i></strong> file.  Open it and adjust it to your liking. You can read the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide">Config Guide</a> in order to understand all the variables and settings in this file. 
+</p>
+<p>
+You can also run the included <strong>build.xml</strong> ANT script
+either in the command line or via Eclipse. This script is an
+application generator wizard. After this it will auto-generate the
+entire application for you and you can then just modify to your liking.
+Look below for a screenshot on how to run the build file from eclipse.
+</p>
+<p>
+<i>See <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure">cbDirectoryStructure</a>, <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide">cbConfigGuide</a></i>
+</p>
+<div align="center"><img src="MyFirstApp_files/ApplicationTemplateAntBuild.png" style="border: 1px outset rgb(234, 234, 234);"></div>
+<p>
+<strong>The ColdBox ANT Application Generator</strong>
+</p>
+<div align="center">
+<img src="MyFirstApp_files/AppTemplateGenerator.png" style="border: 1px outset rgb(234, 234, 234);">
+</div>
+<p>
+<strong>ANT Script: Generated Application</strong>
+</p>
+<div align="center"><img src="MyFirstApp_files/ApplicationTemplate.png" style="border: 1px outset rgb(234, 234, 234);"></div>
+<h2 id="ExtraConfiguration">Extra Configuration</h2>
+<p>If you copied the directory and did not use the ANT script, then you
+need to change the name property of your Application.cfc template. So
+open the file Application.cfc and change the this.name property to
+whatever you want it to be. Remember that every application will need
+its own name property. Also, please note that ColdBox uses the session
+scope for some plugins and the application scope for the framework. So
+alter accordingly to what you need to do in your application, this is
+YOUR JOB.
+</p>
+<p>
+<i>See <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbSystemRequirements">cbSystemRequirements</a></i>
+</p>
+<p>
+Open the provided event handler(s) in the template folder: <strong>main.cfc and general.cfc</strong> and modify them if you need to. I recommend you leave them as they are in order for you to see that the skeleton works.
+</p>
+<p>Now that you have completed editing your configuration file,
+Application.cfc and your first event handler, you are ready to see
+results. Point your browser to your application folder and you will see
+a screen similar to the one below:
+</p>
+<div align="center"><img src="MyFirstApp_files/myFirstApp.png" style="border: 1px outset rgb(234, 234, 234);"></div>
+<h2 id="WhatHappened">What Happened?</h2>
+<p>Well, before I actually go in and explain the code, you will have to
+do some reading first. This is necessary in order for you to understand
+what ColdBox is doing and how it is doing it. So read the following
+sections below:
+</p>
+<ul><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/ColdBox">ColdBox Overview</a> : It will show you a top-down view of what ColdBox is.
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestLifecycle">ColdBox Request LifeCycle</a> : What happens in a request
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure">Directory Structure</a> : How a ColdBox application is structured (More by convention than configuration)
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide">Config Guide</a> : Understand how to configure your application with the implicit event model and application aspects.
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbEventHandlersGuide">Event Handlers Guide</a> : This is SUPER necessary in order to understand how to code in ColdBox
+</li><li><a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestContext">Request Context Guide</a> : How data moves in a request and how to access it.
+</li></ul><h3 id="Step1:ConfiguringtheApplication">Step 1: Configuring the Application</h3>
+<p>
+Below you can see the coldbox.xml that the application runs on, for more in depth detail please look at the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide">Config Guide</a> since the example below does not have all the elements an application can use.
+</p>
+<div class="code"><pre><span class="h_xmlstart">&lt;?</span><span class="h_tag">xml</span><span class="h_other"> </span><span class="h_attribute">version</span><span class="h_other">=</span><span class="h_doublestring">"1.0"</span><span class="h_other"> </span><span class="h_attribute">encoding</span><span class="h_other">=</span><span class="h_doublestring">"UTF-8"</span><span class="h_xmlend">?&gt;</span>
+<span class="h_tag">&lt;Config</span><span class="h_other"> </span><span class="h_attribute">xmlns:xsi</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</a>"</span><span class="h_other"> 
+        </span><span class="h_attribute">xsi:noNamespaceSchemaLocation</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/schema/config_2.6.0.xsd">http://www.coldboxframework.com/schema/config_2.6.0.xsd</a>"</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;Settings&gt;</span>
+                <span class="h_comment">&lt;!--The name of your application.--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"AppName"</span><span class="h_other">                                         </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"MyFirstApp"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- ColdBox set-up information for J2EE installation.
+                     As context-root are actually virtual locations which does not correspond to physical location of files. for example 
+                     /openbd   /var/www/html/tomcat/deploy/bluedragon
+
+                     AppMapping setting will adjust physical location of Project/App files and coldbox will load handlers,plugis,config file etc
+                     Create a cf mapping and enable this value. 
+                     /MyApp /var/www/html/tomcat/deploy/bluedragon/MyAppFolder
+                
+                If you are using a coldbox app to power flex/remote apps, you NEED to set the AppMapping also. In Summary,
+                the AppMapping is either a CF mapping or the path from the webroot to this application root. If this setting
+                is not set, then coldbox will try to auto-calculate it for you. Please read the docs.
+                
+                &lt;Setting name="AppMapping"                                      value="/MyApp"/&gt;      
+                
+                --&gt;</span>
+                <span class="h_comment">&lt;!--Default Debugmode boolean flag (Set to false in production environments)--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"DebugMode"</span><span class="h_other">                                       </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--The Debug Password to use in order to activate/deactivate debugmode,activated by url actions --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"DebugPassword"</span><span class="h_other">                           </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--The fwreinit password to use in order to reinitialize the framework and application.Optional, else leave blank --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ReinitPassword"</span><span class="h_other">                          </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Default event name variable to use in URL/FORM etc. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"EventName"</span><span class="h_other">                                       </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"event"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--This feature is enabled by default to permit the url dumpvar parameter--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"EnableDumpVar"</span><span class="h_other">                           </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Log Errors and entries on the coldfusion server logs, disabled by default if not used--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"EnableColdfusionLogging"</span><span class="h_other">         </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Log Errors and entries in ColdBox's own logging facilities. You choose the location, finally per application logging.--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"EnableColdboxLogging"</span><span class="h_other">            </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--The absolute or relative path to where you want to store your log files for this application--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ColdboxLogsLocation"</span><span class="h_other">                     </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"logs"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Default Event to run if no event is set or passed. Usually the event to be fired first (NOTE: use event handler syntax)--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"DefaultEvent"</span><span class="h_other">                            </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"general.index"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Event Handler to run on the start of a request, leave blank if not used. Emulates the Application.cfc onRequestStart method --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"RequestStartHandler"</span><span class="h_other">             </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"main.onRequestStart"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Event Handler to run at end of all requests, leave blank if not used. Emulates the Application.cfc onRequestEnd method--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"RequestEndHandler"</span><span class="h_other">                       </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Event Handler to run at the start of an application, leave blank if not used. Emulates the Application.cfc onApplicationStart method        --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ApplicationStartHandler"</span><span class="h_other">         </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"main.onAppInit"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Event Handler to run at the start of a session, leave blank if not used.--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"SessionStartHandler"</span><span class="h_other">             </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Event Handler to run at the end of a session, leave blank if not used.--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"SessionEndHandler"</span><span class="h_other">                       </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--The event handler to execute on all framework exceptions. Event Handler syntax required.--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ExceptionHandler"</span><span class="h_other">                        </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--What event to fire when an invalid event is detected--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"onInvalidEvent"</span><span class="h_other">                          </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Full path from the application's root to your custom error page, else leave blank. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"CustomErrorTemplate"</span><span class="h_other">                     </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--The Email address from which all outgoing framework emails will be sent. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"OwnerEmail"</span><span class="h_other">                                      </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- Enable Bug Reports to be emailed out, set to true by default if left blank
+                        A sample template has been provided to you in includes/generic_error.cfm
+                 --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"EnableBugReports"</span><span class="h_other">                        </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--UDF Library To Load on every request for your views and handlers --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"UDFLibraryFile"</span><span class="h_other">                          </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"includes/helpers/ApplicationHelper.cfm"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Messagebox Style Override. A boolean of wether to override the styles using your own css.--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"MessageboxStyleOverride"</span><span class="h_other">         </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Flag to Auto reload the internal handlers directory listing. False for production. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"HandlersIndexAutoReload"</span><span class="h_other">         </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Flag to auto reload the config.xml settings. False for production. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ConfigAutoReload"</span><span class="h_other">                </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- Declare the custom plugins base invocation path, if used. You have to use dot notation.Example: mymapping.myplugins        --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"MyPluginsLocation"</span><span class="h_other">               </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- Declare the external views location. It can be relative to this app or external. This in turn is used to do cfincludes. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ViewsExternalLocation"</span><span class="h_other">           </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- Declare the external handlers base invocation path, if used. You have to use dot notation.Example: mymapping.myhandlers    --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"HandlersExternalLocation"</span><span class="h_other">        </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- Declare the external models base invocation path, if used. You have to use dot notation.Example: mymapping.mymodels        --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ModelsExternalLocation"</span><span class="h_other">          </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Flag to cache handlers. Default if left blank is true. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"HandlerCaching"</span><span class="h_other">                          </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Flag to cache events if metadata declared. Default is true --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"EventCaching"</span><span class="h_other">                            </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--IOC Framework if Used, else leave blank--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"IOCFramework"</span><span class="h_other">                            </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--IOC Definition File Path, relative or absolute --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"IOCDefinitionFile"</span><span class="h_other">                       </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--IOC Object Caching, true/false. For ColdBox to cache your IoC beans--&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"IOCObjectCaching"</span><span class="h_other">                        </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Request Context Decorator, leave blank if not using. Full instantiation path --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"RequestContextDecorator"</span><span class="h_other">         </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!--Flag if the proxy returns the entire request collection or what the event handlers return, default is false --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ProxyReturnCollection"</span><span class="h_other">           </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_comment">&lt;!-- What scope are flash persistance variables using. --&gt;</span>
+                <span class="h_tag">&lt;Setting</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"FlashURLPersistScope"</span><span class="h_other">            </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"session"</span><span class="h_tagend">/&gt;</span>
+        <span class="h_tag">&lt;/Settings&gt;</span>
+
+        <span class="h_comment">&lt;!-- Your Settings can go here, if not needed, use &lt;YourSettings /&gt;. You can use these for anything you like.
+                &lt;YourSettings&gt;
+                        &lt;Setting name="MySetting" value="My Value"/&gt;
+                        
+                        whether to encrypt the values or not
+                        &lt;Setting name="cookiestorage_encryption" value="true"/&gt;
+                        
+                        The encryption seed to use. Else, use a default one (Not Recommened)
+                        &lt;Setting name="cookiestorage_encryption_seed" value="mykey"/&gt;
+                        
+                        The encryption algorithm to use (According to CFML Engine)
+                        &lt;Setting name="cookiestorage_encryption_algorithm" value="CFMX_COMPAT or BD_DEFAULT"/&gt;
+                        
+                        Messagebox Plugin (You can now override the storage scope without affecting all framework applications)
+                        &lt;Setting name="messagebox_storage_scope" value="session or client" /&gt;
+                        
+                        Complex Settings follow JSON Syntax. www.json.org.  
+                        *IMPORTANT: use single quotes in this xml file for JSON notation, ColdBox will translate it to double quotes.
+                &lt;/YourSettings&gt;
+         --&gt;</span>
+        <span class="h_tag">&lt;YourSettings&gt;</span>
+                
+        <span class="h_tag">&lt;/YourSettings&gt;</span>
+        
+        <span class="h_comment">&lt;!-- Custom Conventions : You can override the framework wide conventions of the locations of the needed objects
+        &lt;Conventions&gt;
+                &lt;handlersLocation&gt;&lt;/handlersLocation&gt;
+                &lt;pluginsLocation&gt;&lt;/pluginsLocation&gt;
+                &lt;layoutsLocation&gt;&lt;/layoutsLocation&gt;
+                &lt;viewsLocation&gt;&lt;/viewsLocation&gt;
+                &lt;eventAction&gt;&lt;/eventAction&gt;     
+                &lt;modelsLocation&gt;&lt;/modelsLocation&gt;       
+        &lt;/Conventions&gt;  
+        --&gt;</span>
+        
+        <span class="h_comment">&lt;!--
+        Control the ColdBox Debugger. The panels are self explanatory. The other settings are explained below.
+        PersistentRequestProfiler : Activate the event profiler across multiple requests
+        maxPersistentRequestProfilers : Max records to keep in the profiler. Don't get gready.
+        maxRCPanelQueryRows : If a query is dumped in the RC panel, it will be truncated to this many rows.
+        --&gt;</span>
+        <span class="h_tag">&lt;DebuggerSettings&gt;</span>
+                <span class="h_tag">&lt;PersistentRequestProfiler&gt;</span>true<span class="h_tag">&lt;/PersistentRequestProfiler&gt;</span>
+                <span class="h_tag">&lt;maxPersistentRequestProfilers&gt;</span>10<span class="h_tag">&lt;/maxPersistentRequestProfilers&gt;</span>
+                <span class="h_tag">&lt;maxRCPanelQueryRows&gt;</span>50<span class="h_tag">&lt;/maxRCPanelQueryRows&gt;</span>
+                
+                <span class="h_tag">&lt;TracerPanel</span><span class="h_other">    </span><span class="h_attribute">show</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_attribute">expanded</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_tag">&lt;InfoPanel</span><span class="h_other">              </span><span class="h_attribute">show</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_attribute">expanded</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_tag">&lt;CachePanel</span><span class="h_other">     </span><span class="h_attribute">show</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_attribute">expanded</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+                <span class="h_tag">&lt;RCPanel</span><span class="h_other">                </span><span class="h_attribute">show</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_attribute">expanded</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+        <span class="h_tag">&lt;/DebuggerSettings&gt;</span>     
+        
+        <span class="h_comment">&lt;!--Optional,if blank it will use the CFMX administrator settings.--&gt;</span>
+        <span class="h_tag">&lt;MailServerSettings&gt;</span>
+                <span class="h_tag">&lt;MailServer&gt;&lt;/MailServer&gt;</span>
+                <span class="h_tag">&lt;MailPort&gt;&lt;/MailPort&gt;</span>
+                <span class="h_tag">&lt;MailUsername&gt;&lt;/MailUsername&gt;</span>
+                <span class="h_tag">&lt;MailPassword&gt;&lt;/MailPassword&gt;</span>
+        <span class="h_tag">&lt;/MailServerSettings&gt;</span>
+
+        <span class="h_comment">&lt;!--Emails to Send bug reports, you can create as many as you like --&gt;</span>
+        <span class="h_tag">&lt;BugTracerReports&gt;</span>
+                <span class="h_comment">&lt;!-- &lt;BugEmail&gt;myemail@gmail.com&lt;/BugEmail&gt; --&gt;</span>
+        <span class="h_tag">&lt;/BugTracerReports&gt;</span>
+        
+        <span class="h_comment">&lt;!--Webservice declarations your use in your application, if not use, leave blank
+        Note that for the same webservice name you can have a development url and a production url.--&gt;</span>
+        <span class="h_tag">&lt;WebServices&gt;</span>
+                <span class="h_comment">&lt;!-- &lt;WebService name="TESTWS1" URL="<a href="http://www.test.com/test1.cfc?wsdl">http://www.test.com/test1.cfc?wsdl</a>" DevURL="<a href="http://dev.test.com/test1.cfc?wsdl">http://dev.test.com/test1.cfc?wsdl</a>" /&gt; --&gt;</span>
+                <span class="h_comment">&lt;!-- &lt;WebService name="TESTWS2" URL="<a href="http://www.test.com/test2.cfc?wsdl">http://www.test.com/test2.cfc?wsdl</a>" DevURL="<a href="http://dev.test.com/test2.cfc?wsdl">http://dev.test.com/test2.cfc?wsdl</a>" /&gt; --&gt;</span>
+        <span class="h_tag">&lt;/WebServices&gt;</span>
+
+        <span class="h_comment">&lt;!--Declare Layouts for your application here--&gt;</span>
+        <span class="h_tag">&lt;Layouts&gt;</span>
+                <span class="h_comment">&lt;!--Declare the default layout, MANDATORY--&gt;</span>
+                <span class="h_tag">&lt;DefaultLayout&gt;</span>Layout.Main.cfm<span class="h_tag">&lt;/DefaultLayout&gt;</span>
+                
+                <span class="h_comment">&lt;!--Default View, OPTIONAL
+                &lt;DefaultView&gt;home&lt;/DefaultView&gt;
+                --&gt;</span>
+                
+                <span class="h_comment">&lt;!--
+                Declare other layouts, with view/folder assignments if needed, else do not write them
+                &lt;Layout file="Layout.Popup.cfm" name="popup"&gt;
+                        &lt;View&gt;vwTest&lt;/View&gt;
+                        &lt;View&gt;vwMyView&lt;/View&gt;
+                        &lt;Folder&gt;tags&lt;/Folder&gt;
+                &lt;/Layout&gt;
+                --&gt;</span>
+        <span class="h_tag">&lt;/Layouts&gt;</span>
+
+        <span class="h_comment">&lt;!--Internationalization and resource Bundle setup:
+        &lt;i18N&gt;
+                &lt;DefaultResourceBundle&gt;includes/main&lt;/DefaultResourceBundle&gt;
+                &lt;DefaultLocale&gt;en_US&lt;/DefaultLocale&gt;
+                &lt;LocaleStorage&gt;session&lt;/LocaleStorage&gt;
+                &lt;UknownTranslation&gt;&lt;/UknownTranslation&gt;
+        &lt;/i18N&gt;
+        --&gt;</span>
+        <span class="h_tag">&lt;i18N</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+        
+        <span class="h_comment">&lt;!--Datasource Setup, you can then retreive a datasourceBean via the getDatasource("name") method: --&gt;</span>
+        <span class="h_tag">&lt;Datasources&gt;</span>
+                <span class="h_comment">&lt;!-- &lt;Datasource alias="MyDSNAlias" name="real_dsn_name"   dbtype="mysql"  username="" password="" /&gt; --&gt;</span>
+        <span class="h_tag">&lt;/Datasources&gt;</span>
+        
+        <span class="h_comment">&lt;!--ColdBox Object Caching Settings Overrides the Framework-wide settings --&gt;</span>
+        <span class="h_tag">&lt;Cache&gt;</span>
+                <span class="h_tag">&lt;ObjectDefaultTimeout&gt;</span>60<span class="h_tag">&lt;/ObjectDefaultTimeout&gt;</span>
+                <span class="h_tag">&lt;ObjectDefaultLastAccessTimeout&gt;</span>30<span class="h_tag">&lt;/ObjectDefaultLastAccessTimeout&gt;</span>
+                <span class="h_tag">&lt;UseLastAccessTimeouts&gt;</span>true<span class="h_tag">&lt;/UseLastAccessTimeouts&gt;</span>
+                <span class="h_tag">&lt;ReapFrequency&gt;</span>1<span class="h_tag">&lt;/ReapFrequency&gt;</span>
+                <span class="h_tag">&lt;MaxObjects&gt;</span>100<span class="h_tag">&lt;/MaxObjects&gt;</span>
+                <span class="h_tag">&lt;FreeMemoryPercentageThreshold&gt;</span>0<span class="h_tag">&lt;/FreeMemoryPercentageThreshold&gt;</span>
+                <span class="h_tag">&lt;EvictionPolicy&gt;</span>LRU<span class="h_tag">&lt;/EvictionPolicy&gt;</span>
+        <span class="h_tag">&lt;/Cache&gt;</span>
+        
+        
+        <span class="h_comment">&lt;!-- Interceptor Declarations 
+        &lt;Interceptors throwOnInvalidStates="true"&gt;
+                &lt;CustomInterceptionPoints&gt;comma-delimited list&lt;/CustomInterceptionPoints&gt;
+                &lt;Interceptor class="full class name"&gt;
+                        &lt;Property name="myProp"&gt;value&lt;/Property&gt;
+                        &lt;Property name="myArray"&gt;[1,2,3]&lt;/Property&gt;
+                        &lt;Property name="myStruct"&gt;{ key1:1, key2:2 }&lt;/Property&gt;
+                &lt;/Inteceptor&gt;
+                &lt;Interceptor class="no property" /&gt;
+        &lt;/Interceptors&gt;
+        --&gt;</span>
+        
+        <span class="h_tag">&lt;Interceptors&gt;</span>
+                <span class="h_comment">&lt;!-- USE ENVIRONMENT CONTROL --&gt;</span>
+                <span class="h_tag">&lt;Interceptor</span><span class="h_other"> </span><span class="h_attribute">class</span><span class="h_other">=</span><span class="h_doublestring">"coldbox.system.interceptors.environmentControl"</span><span class="h_tag">&gt;</span>
+                        <span class="h_tag">&lt;Property</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_singlestring">'configFile'</span><span class="h_tag">&gt;</span>config/environments.xml.cfm<span class="h_tag">&lt;/Property&gt;</span>
+                <span class="h_tag">&lt;/Interceptor&gt;</span>
+                <span class="h_comment">&lt;!-- USE AUTOWIRING --&gt;</span>
+                <span class="h_tag">&lt;Interceptor</span><span class="h_other"> </span><span class="h_attribute">class</span><span class="h_other">=</span><span class="h_doublestring">"coldbox.system.interceptors.autowire"</span><span class="h_tag">&gt;</span>
+                        <span class="h_tag">&lt;Property</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_singlestring">'enableSetterInjection'</span><span class="h_tag">&gt;</span>true<span class="h_tag">&lt;/Property&gt;</span>
+                <span class="h_tag">&lt;/Interceptor&gt;</span>
+                <span class="h_comment">&lt;!-- USE SES --&gt;</span>
+                <span class="h_tag">&lt;Interceptor</span><span class="h_other"> </span><span class="h_attribute">class</span><span class="h_other">=</span><span class="h_doublestring">"coldbox.system.interceptors.ses"</span><span class="h_tag">&gt;</span>
+                        <span class="h_tag">&lt;Property</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"configFile"</span><span class="h_tag">&gt;</span>config/routes.cfm<span class="h_tag">&lt;/Property&gt;</span>
+                <span class="h_tag">&lt;/Interceptor&gt;</span>          
+                
+        <span class="h_tag">&lt;/Interceptors&gt;</span>
+        
+<span class="h_tag">&lt;/Config&gt;</span>
+</pre></div><p>Basically, there are a lot of configurations you can do
+for your application like adding datasources, internationalization, IoC
+(Coldspring|Lightwire) support etc. For this application we only care
+about a few configurations: </p>
+<ul><li><strong>AppName</strong> : The name of your application.
+</li><li><strong>DebugMode</strong> : To show or not the debugging panel (set to true in development)
+</li><li><strong>DebugPassword</strong> : Set to blank for dev use (please remember to fill one up)
+</li><li><strong>ReinitPassword</strong> : Set to blank for dev use (please remember to fill one up)
+</li><li><strong>EnableColdboxLogging</strong> : Enables AOP logging for exceptions and information messages. (set to true)
+</li><li><strong>ColdboxLogsLocation</strong> : Default location of the log files <strong>logs</strong> within your application
+</li><li><strong>DefaultEvent</strong> : The event to fire when application starts up or there is no event defined. (set to ehGeneral.dspHello)
+</li><li><strong>RequestStartHandler</strong>' : The event to fire at the beginning of every request. (set to ehMain.onRequestStart)
+</li><li><strong>RequestEndHandler</strong> : The event to fire at the end of every request. (set to ehMain.onRequestEnd)
+</li><li><strong>ApplicationStartHandler</strong> : The event to fire when application starts up. (set to ehMain.onAppInit)
+</li><li><strong>ConfigAutoReload</strong> : To reload the configuration file and reinit the app(set to true, development only)
+</li><li><strong>HandlerCaching</strong> : To cache the event handler
+cfc's in the ColdBox cache. (set to false) You do not want to enable
+this in development unless you are doing load tests. If not, you won't
+see changes reflected until you refresh the cache.
+</li><li><strong>DefaultLayout</strong> : The default layout to use for rendering views.
+</li><li>The ses interceptor for pretty URL's.
+</li></ul><p>
+<br>
+</p>
+<h3 id="Step2:UnderstandingtheLifeCycle">Step 2: Understanding the Life Cycle</h3>
+<p>Now that we know how our application will start up and what events
+to fire we can understand the following life cycle. Please read the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestLifecycle">Application Life Cycle</a>
+</p>
+<p>
+<br>
+</p>
+<h3 id="Step3:TheHandlerCode">Step 3: The Handler Code</h3>
+<p>
+The application start, on request start and on request end handlers
+have no code in them. This is on purpose, so you can fill it up with
+whatever you want. The only meat for the created application resides on
+the <strong>general</strong> handler cfc and on the <strong>index</strong> method.  Our convention is to have a handler called <strong>main</strong> or <strong>implicit</strong> and place all implicit events there.  Below you can see the full <strong>general</strong> handler code:
+</p>
+<div class="code"><pre><span class="h_comment">&lt;!-----------------------------------------------------------------------
+Author   :      Your Name
+Date     :      September 25, 2005
+Description :                   
+        This is a ColdBox event handler for general methods.
+
+Please note that the extends needs to point to the eventhandler.cfc
+in the ColdBox system directory.
+extends = coldbox.system.eventhandler
+        
+-----------------------------------------------------------------------&gt;</span>
+<span class="h_tag">&lt;cfcomponent</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"general"</span><span class="h_other"> </span><span class="h_attribute">extends</span><span class="h_other">=</span><span class="h_doublestring">"coldbox.system.eventhandler"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tag">&gt;</span>
+        
+        <span class="h_comment">&lt;!--- Event Caching Suffix: It will be appended to every event cached key. This can be a locale, dynamic, etc. ---&gt;</span>
+        <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">this.EVENT_CACHE_SUFFIX</span><span class="h_other"> = </span><span class="h_doublestring">""</span><span class="h_tag">&gt;</span>
+        <span class="h_comment">&lt;!--- Pre Handler Execute only if action in this list ---&gt;</span>
+        <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">this.PREHANDLER_ONLY</span><span class="h_other"> = </span><span class="h_doublestring">""</span><span class="h_tag">&gt;</span>
+        <span class="h_comment">&lt;!--- Pre Handler Do not execute if action in this except list ---&gt;</span>
+        <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">this.PREHANDLER_EXCEPT</span><span class="h_other"> = </span><span class="h_doublestring">""</span><span class="h_tag">&gt;</span>
+        <span class="h_comment">&lt;!--- Post Handler Execute only if action in this list ---&gt;</span>
+        <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">this.POSTHANDLER_ONLY</span><span class="h_other"> = </span><span class="h_doublestring">""</span><span class="h_tag">&gt;</span>
+        <span class="h_comment">&lt;!--- Post Handler Do not execute if action in this except list ---&gt;</span>
+        <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">this.POSTHANDLER_EXCEPT</span><span class="h_other"> = </span><span class="h_doublestring">""</span><span class="h_tag">&gt;</span>
+        
+<span class="h_comment">&lt;!------------------------------------------- CONSTRUCTOR ------------------------------------------&gt;</span>
+
+        <span class="h_comment">&lt;!--- This init is mandatory, including the super.init(). ---&gt;</span> 
+        <span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"init"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"general"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"controller"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">super.init</span><span class="h_other">(</span><span class="h_attribute">arguments.controller</span><span class="h_other">)</span><span class="h_tag">&gt;</span>
+                <span class="h_comment">&lt;!--- Any constructor code here ---&gt;</span>
+                <span class="h_tag">&lt;cfreturn</span><span class="h_other"> </span><span class="h_attribute">this</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;/cffunction&gt;</span>
+
+<span class="h_comment">&lt;!----------------------------------------- IMPLICIT EVENTS ------------------------------------------&gt;</span>
+
+        <span class="h_comment">&lt;!--- UNCOMMENT HANDLER IMPLICIT EVENTS
+        
+        &lt;!--- preHandler ---&gt;</span>
+        <span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"preHandler"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"void"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_attribute">hint</span><span class="h_other">=</span><span class="h_doublestring">"Executes before any event in this handler"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"Event"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_other"> </span><span class="h_attribute">required</span><span class="h_other">=</span><span class="h_doublestring">"yes"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">var</span><span class="h_other"> </span><span class="h_attribute">rc</span><span class="h_other"> = </span><span class="h_attribute">event.getCollection</span><span class="h_other">()</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfscript&gt;</span>      
+        
+                <span class="h_tag">&lt;/cfscript&gt;</span>
+        <span class="h_tag">&lt;/cffunction&gt;</span>
+        
+        <span class="h_comment">&lt;!--- postHandler ---&gt;</span>
+        <span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"postHandler"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"void"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_attribute">hint</span><span class="h_other">=</span><span class="h_doublestring">"Executes after any event in this handler"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"Event"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_other"> </span><span class="h_attribute">required</span><span class="h_other">=</span><span class="h_doublestring">"yes"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">var</span><span class="h_other"> </span><span class="h_attribute">rc</span><span class="h_other"> = </span><span class="h_attribute">event.getCollection</span><span class="h_other">()</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfscript&gt;</span>      
+        
+                <span class="h_tag">&lt;/cfscript&gt;</span>
+        <span class="h_tag">&lt;/cffunction&gt;</span>
+        
+        <span class="h_comment">&lt;!--- onMissingAction ---&gt;</span>
+        <span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"onMissingAction"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"void"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_other"> </span><span class="h_attribute">hint</span><span class="h_other">=</span><span class="h_doublestring">"Executes if a request action (method) is not found in this handler"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"Event"</span><span class="h_other">                        </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_other"> </span><span class="h_attribute">required</span><span class="h_other">=</span><span class="h_doublestring">"yes"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"MissingAction"</span><span class="h_other">        </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_other"> </span><span class="h_attribute">required</span><span class="h_other">=</span><span class="h_doublestring">"true"</span><span class="h_other"> </span><span class="h_attribute">hint</span><span class="h_other">=</span><span class="h_doublestring">"The requested action string"</span><span class="h_tagend">/&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">var</span><span class="h_other"> </span><span class="h_attribute">rc</span><span class="h_other"> = </span><span class="h_attribute">event.getCollection</span><span class="h_other">()</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfscript&gt;</span>      
+        
+                <span class="h_tag">&lt;/cfscript&gt;</span>
+        <span class="h_tag">&lt;/cffunction&gt;</span>
+        
+        ---&gt;
+
+<span class="h_comment">&lt;!------------------------------------------- PUBLIC EVENTS ------------------------------------------&gt;</span>
+
+        <span class="h_comment">&lt;!--- Default Action ---&gt;</span>
+        <span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"index"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"void"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"Event"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_tag">&gt;</span>
+                <span class="h_comment">&lt;!--- RC Reference ---&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">var</span><span class="h_other"> </span><span class="h_attribute">rc</span><span class="h_other"> = </span><span class="h_attribute">event.getCollection</span><span class="h_other">()</span><span class="h_tag">&gt;</span>
+                
+                <span class="h_comment">&lt;!--- Do Your Logic Here to prepare a view ---&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">Event.setValue</span><span class="h_other">(</span><span class="h_doublestring">"welcomeMessage"</span><span class="h_other">,</span><span class="h_doublestring">"Welcome to ColdBox!"</span><span class="h_other">)</span><span class="h_tag">&gt;</span>  
+                
+                <span class="h_comment">&lt;!--- Set the View To Display, after Logic ---&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">Event.setView</span><span class="h_other">(</span><span class="h_doublestring">"home"</span><span class="h_other">)</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;/cffunction&gt;</span>
+        
+        <span class="h_comment">&lt;!--- Do Something Action ---&gt;</span>
+        <span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"doSomething"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"void"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"Event"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"any"</span><span class="h_tag">&gt;</span>
+                <span class="h_comment">&lt;!--- RC Reference ---&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">var</span><span class="h_other"> </span><span class="h_attribute">rc</span><span class="h_other"> = </span><span class="h_attribute">event.getCollection</span><span class="h_other">()</span><span class="h_tag">&gt;</span>
+                
+                <span class="h_comment">&lt;!--- Do Your Logic Here, call to models, etc.---&gt;</span>
+
+                <span class="h_comment">&lt;!--- Set the next event to run, after Logic, this relocates the browser---&gt;</span>
+                <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">setNextEvent</span><span class="h_other">(</span><span class="h_doublestring">"general.index"</span><span class="h_other">)</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;/cffunction&gt;</span>
+
+<span class="h_comment">&lt;!------------------------------------------- PRIVATE EVENTS ------------------------------------------&gt;</span>
+
+        
+<span class="h_tag">&lt;/cfcomponent&gt;</span>
+</pre></div><p>
+You can see that we have divided it into several sections:
+</p>
+<ul><li>Dependencies : Where cfproperty dependencies go. (See [<a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbAutowireGuide">wiki:cbAutowireGuide</a> Autowire Guide)
+</li><li>Implicit Events : Some local interception points and local handler implicit executions
+</li><li>Public Events : Methods (actions) that are registered as public/remote access are considered public ColdBox Responding events.
+</li><li>Private Events : Methods (actions) that can only be called from within the framework
+</li></ul><p>
+Before I go into the code for this sample, you might be asking yourself
+why two cfc's for this. Well, remember that controllers are objects
+also. Don't try to have only one controller doing everything for you,
+that is plain old BAAAD!! You need to analyze your application and
+figure out logical <a class="ext-link" href="http://en.wikipedia.org/wiki/Ontology"><span class="icon">ontologies</span></a> for your handlers. What is <a class="ext-link" href="http://en.wikipedia.org/wiki/Ontology"><span class="icon">Ontology</span></a>? 
+</p>
+<blockquote>
+<p>
+Ontology is the study of being or existence. How this controller exists
+and why. What events and actions will be described by this handler. </p>
+</blockquote>
+<p>
+These are all principles that you will need to understand before hand,
+in order to layout a good event model for your application. In this
+case, the model is simple. We have two distinct handlers, one for
+taking care of our implicit events such as onRequestStart and
+onRequestEnd, and a General handler that will say hello to you. As your
+applications become more complex and they need more functionality, you
+will come to start using handler packages. This means, that you will
+group your handlers into directories. A great example is if you are
+building a website with a forum and a blog application. You can then
+package your handlers into a blog directory, a forum directory and a
+site directory. The possibilities are endless. You can continue to add
+functionality to your applications without the need of configurations
+or xml for them.
+</p>
+<p>
+Back to our example. Below is the simple <strong>index</strong> method. To figure out the anatomy of an event (method), please look at the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbEventHandlersGuide">Event Handlers Guide</a>.
+</p>
+<div class="code"><pre><span class="h_tag">&lt;cffunction</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"index"</span><span class="h_other"> </span><span class="h_attribute">access</span><span class="h_other">=</span><span class="h_doublestring">"public"</span><span class="h_other"> </span><span class="h_attribute">returntype</span><span class="h_other">=</span><span class="h_doublestring">"void"</span><span class="h_other"> </span><span class="h_attribute">output</span><span class="h_other">=</span><span class="h_doublestring">"false"</span><span class="h_tag">&gt;</span>
+  <span class="h_tag">&lt;cfargument</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"Event"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"coldbox.system.beans.requestContext"</span><span class="h_tag">&gt;</span>
+  <span class="h_comment">&lt;!--- Do Your Logic Here to prepare a view ---&gt;</span>
+  <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">Event.setValue</span><span class="h_other">(</span><span class="h_doublestring">"welcomeMessage"</span><span class="h_other">,</span><span class="h_doublestring">"Welcome to ColdBox!"</span><span class="h_other">)</span><span class="h_tag">&gt;</span>        
+  <span class="h_comment">&lt;!--- Set the View To Display, after Logic ---&gt;</span>
+  <span class="h_tag">&lt;cfset</span><span class="h_other"> </span><span class="h_attribute">Event.setView</span><span class="h_other">(</span><span class="h_doublestring">"vwHello"</span><span class="h_other">)</span><span class="h_tag">&gt;</span>
+<span class="h_tag">&lt;/cffunction&gt;</span>
+</pre></div><p>First of all, you need to understand that the framework
+will create an event object for you that handles (simulates) and entire
+server request. Inside of this object you have a <strong>request collection</strong>
+which is a data structure that you use to set/get values for use in
+your application. All the FORM and URL variables get appended to this
+collection at the beginning of a request. It also contains more
+variables that you and the framework set for execution. This is a very
+handy object that gets passed around from the beginning of a request to
+the end of a request. Now that you understand that this event object
+simulates your incoming variables and more we can continue to analyze
+the code.
+</p>
+<p>
+<i>See <a href="http://www.coldboxframework.com/api">Live API</a>, <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestContext">Request Context Guide</a></i>
+</p>
+<p>
+What this method does is first set a value into the event object (request collection) named <strong>welcomeMessage</strong>
+with a message. This basically sets a key into the request collection
+structure with the value you set. Then we proceed to tell the event
+object to set a view to render called <strong>vwHello</strong> by using the <strong>setView</strong>
+method. This creates a special variable key in the request collection
+that the framework will pick up later during the request process and
+render the set view. Below is what the method actually takes in as
+parameters.
+</p>
+<ul><li><strong>setView</strong>(string name, [boolean nolayout], [boolean cache], [string cacheTimeout], [string cacheLastAccessTimeout])
+</li></ul><table class="wiki">
+<tbody><tr><td> <strong>name</strong> </td><td> The name of the view to render 
+</td></tr><tr><td> <strong>noLayout</strong> </td><td> Boolean flag that tells the framework to render the view with no layout 
+</td></tr><tr><td> <strong>cacheTimeout</strong> </td><td> In minutes, tells the framework to cache the view. 
+</td></tr><tr><td> <strong>cacheLastAccessTimeout</strong> </td><td> In minutes, tells the framework if view not used in X amount, then purge 
+</td></tr></tbody></table>
+<p>
+ 
+</p>
+<p>Ok, man, this stuff is really vague. I tell an object what view to
+render, then I don't specify a location or even an extension? What is
+this? Is this magic? Well, the reality is that IT IS MAGIC!! Remember
+that ColdBox has conventions that make it easy for the framework to
+find what it needs. That is why you have a <strong>handlers</strong> directory where you place your event handlers, a <strong>config</strong> directory where you place your coldbox.xml file or any other configuration files, <strong>layouts</strong> directory to keep layouts and a <strong>views</strong> directory where you will place your views.  That is why you set the <strong>vwHello</strong> view, the framework will find it in the <strong>views</strong> directory as <strong>vwHello.cfm</strong>. Please read the <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure">Directory Layout &amp; Conventions Guide</a>.
+</p>
+<div class="mynotes">
+<strong>Note:</strong> When setting views, do not append the .cfm extension. The framework does it for you.
+</div>
+<p>
+So in summary, this handler does the following:
+</p>
+<ul><li>Sets a variable in the request collection via the event object 
+</li><li>Sets in the request collection the view to render.  
+</li></ul><p>
+Once this method gets executed by the framework, the internal sequence
+of the framework will then continue to render the specified template.
+</p>
+<p>
+<br>
+</p>
+<h3 id="Step4:LayoutViewcombination">Step 4: Layout/View combination</h3>
+<p>Now, how in the world, does my view get rendered. Well, ColdBox
+provides you with a very simple but flexible and powerful layout
+manager and renderer. The basic principles of rendering views in
+ColdBox is that in your coldbox.xml you declare a DefaultLayout
+variable that points to the actual name of the template to use as your
+layout or container for views to be rendered in. Look below at the
+sample snippet from the configuration file:
+</p>
+<div class="code"><pre><span class="h_comment">&lt;!--Declare Layouts for your application here--&gt;</span>
+<span class="h_tag">&lt;Layouts&gt;</span>
+        <span class="h_comment">&lt;!--Declare the default layout, MANDATORY--&gt;</span>
+        <span class="h_tag">&lt;DefaultLayout&gt;</span>Layout.Main.cfm<span class="h_tag">&lt;/DefaultLayout&gt;</span>
+        
+        <span class="h_comment">&lt;!--Declare other layouts, with view assignments if needed, else do not write them--&gt;</span>
+        <span class="h_tag">&lt;Layout</span><span class="h_other"> </span><span class="h_attribute">file</span><span class="h_other">=</span><span class="h_doublestring">"Layout.Popup.cfm"</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"popup"</span><span class="h_tag">&gt;</span>
+                <span class="h_comment">&lt;!--You can declare all the views that you want to appear with the above layout--&gt;</span>
+                <span class="h_tag">&lt;View&gt;</span>vwTest<span class="h_tag">&lt;/View&gt;</span>
+                <span class="h_tag">&lt;View&gt;</span>vwMyView<span class="h_tag">&lt;/View&gt;</span>
+        <span class="h_tag">&lt;/Layout&gt;</span>
+<span class="h_tag">&lt;/Layouts&gt;</span>
+</pre></div><p>
+As you can see from the snippet above, the default layout is called <strong>Layout.Main.cfm</strong>.
+This is a mandatory setting for your application configuration. The
+other xml elements below is where you can declare implicit renderings
+of views. In human terms, this is to implicitly determine in which
+layout to render the specified view(s) without actually telling the
+framework at runtime. In this sample a <strong>Popup</strong> layout is declared and two views with it: <strong>vwTest and vwMyView</strong>.
+This means, that those two views will be rendered inside of the Popup
+layout unless you specifically override them via the API.
+</p>
+<div class="mynotes">
+<strong>Note:</strong> ColdBox 2.5.0 and greater allows you to have folder layout inheritance. You can declare a <strong>Folder</strong> element.
+</div>
+<p>
+The layout source code is shown below:
+</p>
+<div class="code"><pre>&lt;!<span class="h_sgml_command">DOCTYPE</span> <span class="h_sgml_1st_param">html</span> PUBLIC <span class="h_sgml_doublestring">"-//W3C//DTD XHTML 1.0 Transitional//EN"</span> <span class="h_sgml_doublestring">"<a href="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd</a>"</span>&gt;
+<span class="h_tag">&lt;html</span><span class="h_other"> </span><span class="h_attribute">xmlns</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.w3.org/1999/xhtml">http://www.w3.org/1999/xhtml</a>"</span><span class="h_tag">&gt;</span>
+<span class="h_tag">&lt;head&gt;</span>
+<span class="h_tag">&lt;meta</span><span class="h_other"> </span><span class="h_attribute">http-equiv</span><span class="h_other">=</span><span class="h_doublestring">"Content-Type"</span><span class="h_other"> </span><span class="h_attribute">content</span><span class="h_other">=</span><span class="h_doublestring">"text/html; charset=utf-8"</span><span class="h_other"> </span><span class="h_tagend">/&gt;</span>
+<span class="h_tag">&lt;title&gt;</span>Welcome to Coldbox!!<span class="h_tag">&lt;/title&gt;</span>
+<span class="h_tag">&lt;style&gt;</span>
+        body {
+            font: 10pt verdana;
+            font-family: verdana;
+            padding: 0;
+            margin: 0;
+        }
+        a {
+                color: #0087dd;
+                background-color: inherit;
+                text-decoration: none;
+        }
+        a:hover {
+                color: #CC0001; 
+                background-color: inherit;
+                border-bottom:1px dotted #009CFF;
+        }
+        a.selected{
+                color: #CC0001; 
+                background-color: inherit;
+                border-bottom:1px dotted #009CFF;       
+        }
+        pre {
+             font-size: 80%;
+             padding: 10px;
+             border: 1px solid #EEEEEE;
+         }
+        #infobox{
+                border:1px solid #CCCCCC;
+                padding:10px;
+                background-color:#fffff0;
+                margin:10px 25px 10px 25px;
+         }  
+         td {
+             font: 10pt verdana;
+             font-family: verdana;
+             height: 100%;
+             padding: 10px;
+             margin: 0;
+         }
+         h2 {
+             width: 100%;
+             background-color: black;
+                 margin: 0px;
+             color: #FFFFFF;
+             padding: 20px;
+         }
+         #sidebar {
+             border-left: 1px solid #DDDDDD;
+             width:250px;
+         }
+         
+         #sidebar ul {
+             margin-left: 0;
+             padding-left: 0;
+         }
+         
+         #sidebar ul h3 {
+             margin-top: 25px;
+             font-size: 16px;
+             padding-bottom: 10px;
+             border-bottom: 1px solid #ccc;
+         }
+         
+         #sidebar li {
+             list-style-type: none;
+         }
+         
+         #sidebar ul.links li {
+             margin-bottom: 5px;
+         }
+<span class="h_tag">&lt;/style&gt;</span>
+<span class="h_tag">&lt;/head&gt;</span>
+<span class="h_tag">&lt;body&gt;</span>
+<span class="h_comment">&lt;!--- Render The View. This is set wherever you want to render the view in your Layout. ---&gt;</span>
+<span class="h_tagunknown">&lt;cfoutput&gt;</span>#renderView()#<span class="h_tagunknown">&lt;/cfoutput&gt;</span>
+<span class="h_tag">&lt;/body&gt;</span>
+<span class="h_tag">&lt;/html&gt;</span>
+</pre></div><p>This is a very simple layout. You declare a simple html
+template and in between the body tags is where I will render my views.
+This is of course very simplistic. Once you get into AJAX interaction
+you can render views with no layouts, remove debugging, etc. For this
+simple example, just note that the method <strong>renderView()</strong> gets executed. One good thing to know here is that all layouts and views get rendered in their own context inside of the <strong>renderer</strong> plugin (see <a href="http://www.coldboxframework.com/api">Live API</a> ) This is why you can call the method directly and not use the full call <strong>getPlugin("renderer").renderView()</strong> which you can still use.
+</p>
+<p>
+Now to the view. Below is the source:
+</p>
+<div class="code"><pre><span class="h_tagunknown">&lt;cfoutput&gt;</span>
+<span class="h_tag">&lt;h2&gt;&lt;img</span><span class="h_other"> </span><span class="h_attribute">src</span><span class="h_other">=</span><span class="h_doublestring">"includes/images/coldbox.png"</span><span class="h_other"> </span><span class="h_attribute">align</span><span class="h_other">=</span><span class="h_doublestring">"absmiddle"</span><span class="h_other"> </span><span class="h_attribute">style</span><span class="h_other">=</span><span class="h_doublestring">"padding-right:10px"</span><span class="h_tag">&gt;</span> #Event.getValue("welcomeMessage")#<span class="h_tag">&lt;/h2&gt;</span>
+
+<span class="h_tag">&lt;div</span><span class="h_other"> </span><span class="h_attribute">id</span><span class="h_other">=</span><span class="h_doublestring">"infobox"</span><span class="h_tag">&gt;</span>
+<span class="h_tag">&lt;p&gt;</span>
+    You are now running <span class="h_tag">&lt;strong&gt;</span>#getSetting("codename",1)# #getSetting("version",1)# (#getsetting("suffix",1)#)<span class="h_tag">&lt;/strong&gt;</span>.
+        Welcome to the next generation of ColdFusion applications.  You can now start building your application with ease, we already did the hard work
+        for you.
+<span class="h_tag">&lt;/p&gt;</span>
+<span class="h_tag">&lt;/div&gt;</span>
+
+<span class="h_tag">&lt;table</span><span class="h_other"> </span><span class="h_attribute">cellpadding</span><span class="h_other">=</span><span class="h_doublestring">"10"</span><span class="h_other"> </span><span class="h_attribute">width</span><span class="h_other">=</span><span class="h_doublestring">"98%"</span><span class="h_other"> </span><span class="h_attribute">align</span><span class="h_other">=</span><span class="h_doublestring">"center"</span><span class="h_tag">&gt;</span>
+    <span class="h_tag">&lt;tr&gt;</span>
+        <span class="h_tag">&lt;td</span><span class="h_other"> </span><span class="h_attribute">valign</span><span class="h_other">=</span><span class="h_doublestring">"top"</span><span class="h_tag">&gt;</span>
+            <span class="h_tag">&lt;h3&gt;</span>Getting Started<span class="h_tag">&lt;/h3&gt;</span>
+            <span class="h_tag">&lt;p&gt;</span>
+                You have just auto-generated your application and are ready to customize your application.  Several directories and
+                                files have been created for you.  Please familiarize yourself with your application layout before customizing your
+                                application.
+                  <span class="h_tag">&lt;/p&gt;</span>
+          <span class="h_tag">&lt;h4&gt;</span>Good Starting Links<span class="h_tag">&lt;/h4&gt;</span>
+            <span class="h_tag">&lt;p&gt;</span>
+                <span class="h_tag">&lt;ol&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbDirectoryStructure</a>"</span><span class="h_tag">&gt;</span>Directory Structure <span class="h_tagunknown">&amp; </span>Conventions<span class="h_tag">&lt;/a&gt;</span>
+                    <span class="h_tag">&lt;/li&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbConfigGuide</a>"</span><span class="h_tag">&gt;</span>Coldbox.xml Guide<span class="h_tag">&lt;/a&gt;</span>
+<span class="h_tag">&lt;/pre&gt;</span>
+                    <span class="h_tag">&lt;/li&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbEventHandlersGuide">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbEventHandlersGuide</a>"</span><span class="h_tag">&gt;</span>Event Handler's Guide<span class="h_tag">&lt;/a&gt;</span>
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestContext">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbRequestContext</a>"</span><span class="h_tag">&gt;</span>Request Context's Guide<span class="h_tag">&lt;/a&gt;</span>
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbLayoutsViewsGuide">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbLayoutsViewsGuide</a>"</span><span class="h_tag">&gt;</span>Layouts <span class="h_tagunknown">&amp; </span>Views Guide<span class="h_tag">&lt;/a&gt;</span>
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                                                <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbMyFirstApp">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbMyFirstApp</a>"</span><span class="h_tag">&gt;</span>My First ColdBox App<span class="h_tag">&lt;/a&gt;</span>
+                                        <span class="h_tag">&lt;/li&gt;</span>
+            <span class="h_tag">&lt;/ol&gt;</span>
+                        <span class="h_tag">&lt;sub&gt;</span>* <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi">http://ortus.svnrepository.com/coldbox/trac.cgi</a>"</span><span class="h_tag">&gt;</span>Wiki Docs<span class="h_tag">&lt;/a&gt;&lt;/sub&gt;</span>
+            <span class="h_tag">&lt;/p&gt;</span>
+                        <span class="h_tag">&lt;h4&gt;</span>ColdBox URL Actions<span class="h_tag">&lt;/h4&gt;</span>
+                        <span class="h_tag">&lt;p&gt;</span>ColdBox can use some very important URL actions to interact with your application. You can try them out below:<span class="h_tag">&lt;/p&gt;</span>
+                        <span class="h_tag">&lt;p&gt;</span>
+                                <span class="h_tag">&lt;ol&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                                                <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"index.cfm?fwreinit=true"</span><span class="h_tag">&gt;</span>Reinitialize the framework<span class="h_tag">&lt;/a&gt;</span> (fwreinit=1)
+                                        <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                                                <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"index.cfm?debugmode=false"</span><span class="h_tag">&gt;</span>Remove Debug Mode<span class="h_tag">&lt;/a&gt;</span> (debugmode=false)
+                                        <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                                                <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"index.cfm?debugmode=true"</span><span class="h_tag">&gt;</span>Enable Debug Mode<span class="h_tag">&lt;/a&gt;</span> (debugmode=true)
+                                        <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;/ol&gt;</span>
+                                <span class="h_tag">&lt;sub&gt;</span>* <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbURLActions">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbURLActions</a>"</span><span class="h_tag">&gt;</span>URL Actions Guide<span class="h_tag">&lt;/a&gt;&lt;/sub&gt;</span>
+                        <span class="h_tag">&lt;/p&gt;</span>
+            <span class="h_tag">&lt;h4&gt;</span>Customizing your Application<span class="h_tag">&lt;/h4&gt;</span>
+            <span class="h_tag">&lt;p&gt;</span>
+                You can now start editing your application and building great ColdBox enabled apps. Important files <span class="h_tagunknown">&amp; </span>locations:
+                <span class="h_tag">&lt;ol&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/config/coldbox.xml.cfm<span class="h_tag">&lt;/b&gt;</span>: Your application configuration file
+                    <span class="h_tag">&lt;/li&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/config/environments.xml.cfm<span class="h_tag">&lt;/b&gt;</span>: Your per-tier settings
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                         <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/config/routes.cfm<span class="h_tag">&lt;/b&gt;</span>: Your SES routing table
+                    <span class="h_tag">&lt;/li&gt;</span>
+                    <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/handlers<span class="h_tag">&lt;/b&gt;</span>: Your Application controllers
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/includes<span class="h_tag">&lt;/b&gt;</span>: Assets, Helpers, i18n, templates and more.
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/includes/helpers<span class="h_tag">&lt;/b&gt;</span>: Place all your application and specific helpers here
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/layouts<span class="h_tag">&lt;/b&gt;</span>: Where you place all your application layouts
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/logs<span class="h_tag">&lt;/b&gt;</span>: The ColdBox Logs directory
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/model<span class="h_tag">&lt;/b&gt;</span>: The meat of your app, your business logic objects
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/plugins<span class="h_tag">&lt;/b&gt;</span>: Where you place custom plugins built by you!
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/test<span class="h_tag">&lt;/b&gt;</span>: Your unit testing folder (Just DO IT!!)
+                    <span class="h_tag">&lt;/li&gt;</span>
+                                        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;b&gt;</span>/views<span class="h_tag">&lt;/b&gt;</span>: Where you create all your views and viewlets
+                    <span class="h_tag">&lt;/li&gt;</span>
+                <span class="h_tag">&lt;/ol&gt;</span>
+            <span class="h_tag">&lt;/p&gt;</span>
+        <span class="h_tag">&lt;/td&gt;</span>
+                
+                
+                
+        <span class="h_tag">&lt;td</span><span class="h_other"> </span><span class="h_attribute">valign</span><span class="h_other">=</span><span class="h_doublestring">"top"</span><span class="h_other"> </span><span class="h_attribute">id</span><span class="h_other">=</span><span class="h_doublestring">"sidebar"</span><span class="h_tag">&gt;</span>
+        <span class="h_tag">&lt;h3&gt;</span>Docs Search<span class="h_tag">&lt;/h3&gt;</span>
+                <span class="h_tag">&lt;p&gt;</span>Search all of the docs<span class="h_tag">&lt;/p&gt;</span>
+        <span class="h_tag">&lt;li&gt;</span>
+                        <span class="h_tag">&lt;form</span><span class="h_other"> </span><span class="h_attribute">id</span><span class="h_other">=</span><span class="h_doublestring">"search"</span><span class="h_other"> </span><span class="h_attribute">method</span><span class="h_other">=</span><span class="h_doublestring">"get"</span><span class="h_other"> </span><span class="h_attribute">action</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/search">http://ortus.svnrepository.com/coldbox/trac.cgi/search</a>"</span><span class="h_tag">&gt;</span>
+                                <span class="h_tag">&lt;div&gt;</span>
+                                <span class="h_tag">&lt;input</span><span class="h_other"> </span><span class="h_attribute">id</span><span class="h_other">=</span><span class="h_doublestring">"proj-search"</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"text"</span><span class="h_other"> </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">""</span><span class="h_other"> </span><span class="h_attribute">accesskey</span><span class="h_other">=</span><span class="h_doublestring">"f"</span><span class="h_other"> </span><span class="h_attribute">size</span><span class="h_other">=</span><span class="h_doublestring">"15"</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"q"</span><span class="h_tagend">/&gt;</span>
+                                <span class="h_tag">&lt;input</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"submit"</span><span class="h_other"> </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"Search"</span><span class="h_tagend">/&gt;</span>
+                                <span class="h_tag">&lt;input</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"hidden"</span><span class="h_other"> </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"on"</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"wiki"</span><span class="h_tagend">/&gt;</span>
+                                <span class="h_tag">&lt;input</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"hidden"</span><span class="h_other"> </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"off"</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"changeset"</span><span class="h_tagend">/&gt;</span>
+                                <span class="h_tag">&lt;input</span><span class="h_other"> </span><span class="h_attribute">type</span><span class="h_other">=</span><span class="h_doublestring">"hidden"</span><span class="h_other"> </span><span class="h_attribute">value</span><span class="h_other">=</span><span class="h_doublestring">"on"</span><span class="h_other"> </span><span class="h_attribute">name</span><span class="h_other">=</span><span class="h_doublestring">"ticket"</span><span class="h_tagend">/&gt;</span>
+                                <span class="h_tag">&lt;/div&gt;</span>
+                        <span class="h_tag">&lt;/form&gt;</span>
+        <span class="h_tag">&lt;/li&gt;</span>
+        <span class="h_tag">&lt;li&gt;</span>
+            <span class="h_tag">&lt;h3&gt;</span>ColdBox Community Links<span class="h_tag">&lt;/h3&gt;</span>
+            <span class="h_tag">&lt;ul</span><span class="h_other"> </span><span class="h_attribute">class</span><span class="h_other">=</span><span class="h_doublestring">"links"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;li&gt;</span>
+                    <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/">http://www.coldboxframework.com</a>"</span><span class="h_tag">&gt;</span>ColdBox Site<span class="h_tag">&lt;/a&gt;</span>
+                <span class="h_tag">&lt;/li&gt;</span>
+                <span class="h_tag">&lt;li&gt;</span>
+                    <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://blog.coldboxframework.com/">http://blog.coldboxframework.com</a>"</span><span class="h_tag">&gt;</span>Blog<span class="h_tag">&lt;/a&gt;</span>
+                <span class="h_tag">&lt;/li&gt;</span>
+                <span class="h_tag">&lt;li&gt;</span>
+                    <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://forums.coldboxframework.com/">http://forums.coldboxframework.com/</a>"</span><span class="h_tag">&gt;</span>Forums<span class="h_tag">&lt;/a&gt;</span>
+                <span class="h_tag">&lt;/li&gt;</span>
+                <span class="h_tag">&lt;li&gt;</span>
+                    <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/">http://ortus.svnrepository.com/coldbox/</a>"</span><span class="h_tag">&gt;</span>Bug Tracker/Wiki<span class="h_tag">&lt;/a&gt;</span>
+                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                    <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://groups.google.com/group/coldbox">http://groups.google.com/group/coldbox</a>"</span><span class="h_tag">&gt;</span>Mailing List<span class="h_tag">&lt;/a&gt;</span>
+                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/index.cfm/download/main">http://www.coldboxframework.com/index.cfm/download/main</a>"</span><span class="h_tag">&gt;</span>Downloads<span class="h_tag">&lt;/a&gt;</span>
+                                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/api/">http://www.coldboxframework.com/api/</a>"</span><span class="h_tag">&gt;</span>ColdBox API<span class="h_tag">&lt;/a&gt;</span>
+                                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbCodeDepot">http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbCodeDepot</a>"</span><span class="h_tag">&gt;</span>Code Depot<span class="h_tag">&lt;/a&gt;</span>
+                                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/index.cfm/download/videos">http://www.coldboxframework.com/index.cfm/download/videos</a>"</span><span class="h_tag">&gt;</span>ColdBox Videos<span class="h_tag">&lt;/a&gt;</span>
+                                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/index.cfm/support/overview">http://www.coldboxframework.com/index.cfm/support/overview</a>"</span><span class="h_tag">&gt;</span>Community Support<span class="h_tag">&lt;/a&gt;</span>
+                                <span class="h_tag">&lt;/li&gt;</span>
+                                <span class="h_tag">&lt;li&gt;</span>
+                                        <span class="h_tag">&lt;a</span><span class="h_other"> </span><span class="h_attribute">href</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/index.cfm/support/training">http://www.coldboxframework.com/index.cfm/support/training</a>"</span><span class="h_tag">&gt;</span>Training <span class="h_tagunknown">&amp; </span>Courses<span class="h_tag">&lt;/a&gt;</span>
+                                <span class="h_tag">&lt;/li&gt;</span>
+            <span class="h_tag">&lt;/ul&gt;</span>
+        <span class="h_tag">&lt;/li&gt;</span>
+                
+                <span class="h_tag">&lt;p&gt;</span><span class="h_entity">&amp;nbsp;</span><span class="h_tag">&lt;/p&gt;</span>
+                <span class="h_tag">&lt;div</span><span class="h_other"> </span><span class="h_attribute">style</span><span class="h_other">=</span><span class="h_doublestring">"margin:auto;text-align:center"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;img</span><span class="h_other"> </span><span class="h_attribute">src</span><span class="h_other">=</span><span class="h_doublestring">"<a href="http://www.coldboxframework.com/includes/images/logos/poweredby.gif">http://www.coldboxframework.com/includes/images/logos/poweredby.gif</a>"</span><span class="h_tag">&gt;</span>
+                <span class="h_tag">&lt;/div&gt;</span>
+    <span class="h_tag">&lt;/td&gt;</span>
+    <span class="h_tag">&lt;/tr&gt;</span>
+<span class="h_tag">&lt;/table&gt;</span>
+<span class="h_tagunknown">&lt;/cfoutput&gt;</span>
+</pre></div><p>
+It basically just does a cfoutput and outputs some content. The first output is the <strong>welcomeMessage</strong> we set in the handler. The second message is actually outputting some framework settings. See <a class="wiki" href="http://ortus.svnrepository.com/coldbox/trac.cgi/wiki/cbSettingsGuide">Settings Guide</a>
+to learn to interact with the framework settings. That line gets the
+current codename, version and suffix of your running framework
+installation. One thing you will notice is that I also output the same
+welcome message without actually using the event object but the <strong>rc</strong> scope. Please see the note below.
+</p>
+<div class="mynotes">
+<strong>Note:</strong> All layouts and views have access to the <strong>rc</strong>
+scope. This scope is a reference to the current request collection
+structure. This way it is easier to access variables without going to
+the event object.
+</div>
+<h2 id="Conclusion">Conclusion</h2>
+<p>Now get your mind out of procedural code, dive into OO Programming.
+Please make sure to fasten your seat belts, it WILL GET BUMPY!!
+</p>
+
+
+</body></html>

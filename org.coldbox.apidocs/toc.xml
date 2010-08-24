@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Coldbox Platform Reference">
+	<topic href="html/index.html" label="API Reference"> 
+		<topic label="ColdBox API Docs" href="html/index.html" />
+		<topic label="Overview Summary" href="html/overview-summary.html"/>
+		<topic label="All Classes" href="html/allclasses-frame.html"/>
+	</topic>
+	<topic label="Wiki Guides">
+		<topic label="ColdBox Overview" href="html/wiki/Overview.html" />
+		<topic label="My First ColdBox Application" href="html/wiki/MyFirstApp.html" />
+	</topic>
+	<topic href="html/SchemaDocs/index.html" label="Configuration File Reference">
+		<topic label="Configuration Schema Docs" href="html/SchemaDocs/index.html" />
+	</topic>
+	<topic label="ColdBox External References">
+		<topic label="Official Website" href="http://www.coldbox.org" />
+  <topic href="http://wiki.coldbox.org" label="New ColdBox Wiki">
+  </topic>
+		<topic label="Blog" href="http://blog.coldbox.org" />
+		<topic label="Forums" href="http://forums.coldbox.org" />
+		<topic label="Professional Support" href="http://www.coldbox.org/index.cfm/support" />
+		<topic label="Training" href="http://www.coldbox.org/index.cfm/training" />
+  		<topic href="http://www.twitter.com/coldbox" label="ColdBox Twitter Feed">
+  </topic>
+    <topic href="http://www.coldbox.org/index.cfm/forgebox" label="ForgeBox">
+    </topic>
+	</topic>
+</toc>

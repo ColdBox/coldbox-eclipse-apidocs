@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: ColdBox Documentation and Reference
+Bundle-SymbolicName: org.coldbox.apidocs;singleton:=true
+Bundle-Version: 2.1.0
+Bundle-Activator: org.coldbox.apidocs.Activator
+Bundle-Vendor: Luis Majano - Ortus Solutions, Corp
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime
